@@ -16,16 +16,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-//import com.in28minutes.microservices.camelmicroserviceb.CurrencyExchange;
+import com.microservices.camelmicroserviceb.CurrencyExchange;
 
 @Component
 public class ActiveMqReceiverRouter extends RouteBuilder {
 
-//	@Autowired
-//	private MyCurrencyExchangeProcessor myCurrencyExchangeProcessor;
-//
-//	@Autowired
-//	private MyCurrencyExchangeTransformer myCurrencyExchangeTransformer;
+	@Autowired
+	private MyCurrencyExchangeProcessor myCurrencyExchangeProcessor;
+
+	@Autowired
+	private MyCurrencyExchangeTransformer myCurrencyExchangeTransformer;
 
 	@Override
 	public void configure() throws Exception {
@@ -61,29 +61,29 @@ public class ActiveMqReceiverRouter extends RouteBuilder {
 
 }
 
-//@Component
-//class MyCurrencyExchangeProcessor {
-//
-//	Logger logger = LoggerFactory.getLogger(MyCurrencyExchangeProcessor.class);
-//
-//	public void processMessage(CurrencyExchange currencyExchange) {
-//
-//		logger.info("Do some processing wiht currencyExchange.getConversionMultiple() value which is {}",
-//				currencyExchange.getConversionMultiple());
-//
-//	}
-//}
+@Component
+class MyCurrencyExchangeProcessor {
 
-//@Component
-//class MyCurrencyExchangeTransformer {
-//
-//	Logger logger = LoggerFactory.getLogger(MyCurrencyExchangeProcessor.class);
-//
-//	public CurrencyExchange processMessage(CurrencyExchange currencyExchange) {
-//
-//		currencyExchange.setConversionMultiple(currencyExchange.getConversionMultiple().multiply(BigDecimal.TEN));
-//
-//		return currencyExchange;
-//
-//	}
-//}
+	Logger logger = LoggerFactory.getLogger(MyCurrencyExchangeProcessor.class);
+
+	public void processMessage(CurrencyExchange currencyExchange) {
+
+		logger.info("Do some processing wiht currencyExchange.getConversionMultiple() value which is {}",
+				currencyExchange.getConversionMultiple());
+
+	}
+}
+
+@Component
+class MyCurrencyExchangeTransformer {
+
+	Logger logger = LoggerFactory.getLogger(MyCurrencyExchangeProcessor.class);
+
+	public CurrencyExchange processMessage(CurrencyExchange currencyExchange) {
+
+		currencyExchange.setConversionMultiple(currencyExchange.getConversionMultiple().multiply(BigDecimal.TEN));
+
+		return currencyExchange;
+
+	}
+}
